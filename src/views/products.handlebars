@@ -1,0 +1,38 @@
+<div style="display: flex;">
+    <div style="width: 50%;">
+        <h1>Productos</h1>
+        <div>
+            <ol id="products">
+
+            </ol>
+        </div>
+    </div>
+    <div style="width: 50%;">
+        <h1>Filtros</h1>
+        <label for="limit">Limit</label>
+        <br>
+        <input name="limit" type="number" id="limit">
+        <br>
+        <label for="page">Page</label>
+        <br>
+        <input name="page" type="number" id="page">
+        <br>
+        <label for="query">Query</label>
+        <br>
+        <select name="query" type="number" id="query">
+
+        </select>
+        <br>
+        <label for="sort">Asc/Desc</label>
+        <br>
+        <select name="sort" id="sort">
+            
+        </select>
+        
+        <br>
+    </div>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/products.js"></script>
