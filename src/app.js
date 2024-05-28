@@ -75,27 +75,36 @@ socketServer.on('connection', socket => {
     })
 
     productManager.getProducts()
-            .then(products => {
-                //socketServer.emit('products', products)
-                socketServer.emit('addProductsRealTime', products)
-            })
-
-
-    productManager.getProductsPaginate()
         .then(products => {
-            socketServer.emit('products', products)
-    })
+            console.log("enviando socket");
+            socketServer.emit('allProducts', products)
+            socketServer.emit('addProductsRealTime', products)
+        })
+    
+    
+    cartManager.getProductsToCart()
+        .then(productsCart => {
+            socketServer.emit('productsCart', productsCart)
+        })
 
+    socket.on('dataToPaginate', (dataToPaginate) => {
+        productManager.getProductsPaginate(dataToPaginate)
+            .then(products => {
+                console.log(products);
+                socketServer.emit('products', products)
+            })
+    }) 
     socket.on('addProductToCart', (data) => {
         console.log("Recibiendo producto para agregar al carrito");
         cartManager.addProductToCart(data)
-        .then(() => {
-            console.log('Mostrando carrito');
-            cartManager.getProductsToCart()
-            .then(products => {
-                socketServer.emit('productsCart', products)
+            .then(() => {
+                console.log('Mostrando carrito');
+                productManager.getProductsPaginate()
+                    .then(products => {
+                        socketServer.emit('products', products)
+                    })
             })
-        })
+        
     })
 
     socket.on('addProduct', (data) => {
@@ -141,8 +150,25 @@ socketServer.on('connection', socket => {
             })
     })
 
+    socket.on('deleteProductToCart', (data) => {
+        cartManager.deleteProductToCart(data)
+            .then(() => {
+                cartManager.getProductsToCart()
+                .then(productsCart => {
+                    socketServer.emit('productsCart', productsCart)
+                })
+            })
+    })
 
-
+    socket.on('emptyCart', (data) =>{
+        cartManager.deleteAllProductsToCart(data)
+        .then(()=> {
+            cartManager.getProductsToCart()
+            .then(productsCart => {
+                socketServer.emit('productsCart', productsCart)
+            })
+        })
+    })
 })
 
 

@@ -2,34 +2,43 @@
     <div style="width: 50%;">
         <h1>Productos</h1>
         <div>
+            <div id="divProducts">
+                <button id="btnBack" disabled>Back Page</button>
+                <button id="btnNext" disabled>Next Page</button>
+            </div>
             <ol id="products">
 
             </ol>
+
         </div>
     </div>
     <div style="width: 50%;">
         <h1>Filtros</h1>
-        <label for="limit">Limit</label>
-        <br>
-        <input name="limit" type="number" id="limit">
-        <br>
-        <label for="page">Page</label>
-        <br>
-        <input name="page" type="number" id="page">
-        <br>
-        <label for="query">Query</label>
-        <br>
-        <select name="query" type="number" id="query">
+        <div id="limitDiv">
+            <label for="limit">Limit</label>
+            <br>
+            <input name="limit" type="number" id="limit">
+        </div>
+        <div id="pageDiv">
+            <label for="page">Page</label>
+            <br>
+            <input name="page" type="number" id="page">
+        </div>
+        <div id="queryDiv">
+            <label for="query">Query</label>
+            <br>
+            <select name="query" type="number" id="query">
+                <option value="">Elije una opcion</option>
+            </select>
+        </div>
+        <div id="sortDiv">
+            <label for="sort">Asc/Desc</label>
+            <br>
+            <select name="sort" id="sort">
 
-        </select>
-        <br>
-        <label for="sort">Asc/Desc</label>
-        <br>
-        <select name="sort" id="sort">
-            
-        </select>
-        
-        <br>
+            </select>
+        </div>
+
     </div>
 </div>
 
